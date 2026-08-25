@@ -5,22 +5,26 @@
 ### Added — Expert feedback integration + Methodology upgrades
 
 **Brookings 5 recommendations implemented**
+
 - Red Team devil's advocate protocol (ops/red-team-protocol.md)
 - Quantitative economic transmission chain: oil → IRGC payroll → regime stability (frameworks/economic-transmission-chain.md)
 - Israel spoiler mechanism: Netanyahu survival calculus + 3 spoiler chains (frameworks/israel-spoiler-mechanism.md)
 - Structured data sources + 10 Black Swans + confidence levels HC/MC/LC/SA (ops/data-sources-uncertainty.md)
 
 **P0 improvements from simulated expert feedback**
+
 - Iranian society pulse module: 8-variable domestic fragility, comprehensive vulnerability raised to 5.0-6.0/10 (frameworks/society-pulse.md)
 - Probability audit trail: base rate → adjustments → traceable calculation + backtesting + information decay (ops/probability-audit-trail.md)
 - Mojtaba tracking protocol: 6-dimension tracking + Sadjadpour counterargument integration (ops/mojtaba-tracking.md)
 
 **Forecasting & Debate**
+
 - Forecasting toolkit: question templates, verification dashboard, 5-layer time resolution, 10 causal chains, action mapping (ops/forecasting-toolkit.md)
 - Multi-agent adversarial debate protocol: Red Team escalation, 5-round structure, Steel Man, disagreement maps (ops/adversarial-debate.md)
 - Narrative engine: Wuxia / Three Kingdoms / Shakespeare / Greek tragedy analogy frameworks (frameworks/narrative-engine.md)
 
 **Project files**
+
 - Bilingual README (EN + ZH, different narratives not translations)
 - Bilingual interactive dashboard with EN/ZH toggle
 - Simulated expert feedback from 5 top experts (EXPERT-FEEDBACK.md)
@@ -29,6 +33,7 @@
 - Architecture upgrade roadmap placeholder (SKILL.md §11)
 
 ### Changed
+
 - History module: 17 → 27 files (added 8 frameworks + 7 ops)
 - SKILL.md: 402 → 540+ lines
 - Total file count: ~83 → 119 (after deduplication)
@@ -38,6 +43,7 @@
 ### Added — Module 4: /history/ (21 files)
 
 **Persian Historical Mental Models (7 YAML)**
+
 - Cyrus the Great — Inclusive Empire model
 - Darius I — Institutional Rule model (→ Khamenei Sr. mapping)
 - Shah Abbas I — Sectarian State-Builder (→ Islamic Republic = Safavid 2.0)
@@ -47,6 +53,7 @@
 - Nader Shah + Reza Shah — Military Strongman (→ IRGC politicization roots)
 
 **Analytical Frameworks (6 .md)**
+
 - Shahnameh Cultural Psychology — 5 narrative archetypes
 - Historical Pattern → Contemporary Mapping Matrix — 5 matrices
 - Imperial Succession Cycle — 6-stage model
@@ -55,19 +62,23 @@
 - Economic Transmission Chain — Oil price → IRGC payroll → regime stability (quantitative)
 
 **US War Decision Patterns (3 files)**
+
 - 6 recurring patterns (Coercion Illusion, Lebovic Cycle, Korea Freeze, Election Cycle, Jacksonian Tradition, Intelligence Failure)
 - 8 systematic decision-making biases + scan checklist
 - 7 US-Iran critical decision nodes (1953→2026)
 
 **Operational Protocols (3 files)**
+
 - Auto-Brief Protocol — 5-search real-time intelligence workflow
 - Red Team Protocol — Devil's advocate before every major judgment
 - Data Sources + Uncertainty — Structured data sources, 10 Black Swans, confidence levels (HC/MC/LC/SA)
 
 **Reference**
+
 - 29-book reading list across 5 tiers (including Persian-language sources)
 
 ### Changed
+
 - SKILL.md upgraded from v1.0 to v1.2 (402 → 524 lines)
 - Architecture from "two-module" to "five-module"
 - Step 0 added: real-time intelligence collection
@@ -82,6 +93,7 @@
 ## [1.0.0] - 2026-04-14
 
 ### Initial Release
+
 - Module 1: 32 analyst/institution knowledge bases (/sources/)
 - Module 2: 12 decision-maker behavioral models (/decisionmakers/)
 - Module 3: 30 activatable thinking perspectives (/perspectives/)

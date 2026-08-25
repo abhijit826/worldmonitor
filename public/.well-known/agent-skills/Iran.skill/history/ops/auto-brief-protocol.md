@@ -1,4 +1,5 @@
 # 实时情报简报协议
+
 # Auto-Brief Protocol for Iran.skill
 
 **版本**：1.0 | **功能**：定义每次调用 Skill 时的实时情报搜集和整合流程
@@ -32,30 +33,35 @@
 ## 标准搜索序列（5 次搜索，<30 秒）
 
 ### 搜索 1：停火/谈判状态
+
 ```
 查询：Iran US ceasefire negotiations [当前月份] [当前年份]
 目标：停火是否有效？新一轮谈判？任何一方的新声明？
 ```
 
 ### 搜索 2：霍尔木兹/封锁状态
+
 ```
 查询：Strait of Hormuz shipping blockade Iran [当前月份]
 目标：每日通行船数 vs 基线(60-70)？封锁执行力度？油价？
 ```
 
 ### 搜索 3：核浓缩/IAEA
+
 ```
 查询：Iran uranium enrichment IAEA latest [当前年份]
 目标：最新浓缩丰度？IAEA 访问权限变化？新报告？
 ```
 
 ### 搜索 4：Mojtaba/IRGC 信号
+
 ```
 查询：Mojtaba Khamenei IRGC statement [当前月份]
 目标：任何公开表态？IRGC 人事变动？内部分裂信号？
 ```
 
 ### 搜索 5：区域动态
+
 ```
 查询：Israel Lebanon Hezbollah Iran [当前月份] [当前年份]
 目标：黎巴嫩前线？代理人动态？以色列单独行动？

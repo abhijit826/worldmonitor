@@ -7,7 +7,7 @@
       "type": "skill-md",
       "description": "Geopolitical analysis OS with 2,500-year historical patterns, analyst models, and decision-maker predictions.",
       "url": "https://worldmonitor.app/.well-known/agent-skills/Iran.skill/SKILL.md",
-      "digest": "sha256:f823242f27cb6046ac1dbe865373bd01bf1cbcfb5c2a6d5c5940035b60adaf9d"
+      "digest": "sha256:7c459cc708f6cd7400807a21a94d17dcd1625775024ca1be96478b112c0e17a6"
     },
     {
       "name": "assess-energy-shock",

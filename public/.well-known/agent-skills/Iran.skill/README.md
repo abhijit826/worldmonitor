@@ -100,6 +100,7 @@ Simulated review from Brookings Institution perspective: **B+/A-**
 ### Build your own — or wait for ours
 
 The methodology is replicable. Swap Iran for any crisis:
+
 - **Ukraine.skill** — Soviet collapse mental models + NATO expansion + Russian strategic culture
 - **Taiwan.skill** — Chinese imperial cycle + US-China precedents + Japan/Korea variables
 

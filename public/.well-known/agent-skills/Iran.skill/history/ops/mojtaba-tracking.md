@@ -1,4 +1,5 @@
 # Mojtaba Khamenei 追踪专项
+
 # Mojtaba Tracking Protocol
 
 **时间戳**：2026-04-14 | **功能**：最高优先级的数据收集任务
@@ -95,11 +96,13 @@ Khamenei Sr. 在 1989 年接任时也被认为是「弱继承人」，结果用�
 Sadjadpour 警告我们不要低估 Mojtaba。具体来说：
 
 **我们可能犯的错误**：
+
 1. ❌ 假设 Mojtaba = IRGC 傀儡 → 他可能有独立权力基础（15年掌管 Khamenei 办公室）
 2. ❌ 用「弱继承人」类比预测他会失败 → Khamenei Sr. 本人就是「弱继承人」的成功案例
 3. ❌ 假设他的合法性只来自 IRGC → 他可能正在建立宗教/家族双重合法性
 
 **我们需要验证的假设**：
+
 - H1：Mojtaba 是 IRGC 的傀儡 → 追踪人事任命（维度二）和 IRGC 关系（维度三）
 - H2：Mojtaba 正在建立独立权威 → 追踪他是否安插自己人、发出独立外交信号
 - H3：Mojtaba 在走 Khamenei Sr. 的十年巩固之路 → 追踪权力行使的渐进模式

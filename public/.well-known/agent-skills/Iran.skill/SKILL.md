@@ -44,18 +44,21 @@ changelog: |
 
 **核出口坡道（Nuclear Calculus）**
 60% 浓缩 → 90% 武器级技术时间窗 4-8 周（假设离心机存活）。三种政治出口：
+
 - **秘密突破**：Natanz/Fordow 打击后地下设施重建 + IAEA 驱逐（概率 15-25%）
 - **公开突破**：宣示性核试（概率 5-10%，伊朗历史上规避）
 - **受制约升级**：浓缩丰度抬升但不越线（概率 50-65%，最可能路径）
 关键可观察信号：IAEA 访问权限变化 / 商业卫星图（Planet/Maxar）显示的新地下设施 / 离心机进出口。
 
 **战争终止（War Termination）三路径**
+
 - **A 路径（美方单方宣胜停火）**：概率 35-45%。触发：Trump 觉得「赢够了」（关税/封锁制造国内叙事），给伊朗象征性让步。类比 2018 朝鲜。**历史验证**：此路径本质上是美国对外战争 Lebovic 四阶段循环的「阶段四」（延迟撤离+宣布胜利），也是霍梅尼「喝毒酒」模式的当代版——双方同时宣布胜利。
 - **B 路径（结构性僵局/冻结冲突）**：概率 30-40%。类比 1988 两伊停火、2006 真主党停火。**历史验证**：美国制裁/封锁一旦开始几乎从不主动结束（古巴60年/朝鲜70年），B 路径一旦形成可能持续数十年。
 - **C 路径（政权更迭）**：概率 <10%。**已被 2026-02-28 后的呼吁起义未获响应证伪**。不要把 C 路径当默认分析框架。
 
 **政权脆弱性（Domestic Fragility）阈值**
 关键变量不是抗议规模/通胀/里亚尔崩溃（均已证伪），而是：
+
 1. **IRGC 内部分裂信号**（最重要）
 2. **Basij 执行意愿**（基层镇压部队）
 3. **精英外逃**（子女亲属离境）
@@ -162,12 +165,14 @@ Iran.skill/
 ```
 
 **四个模块功能不可混用：**
+
 - 模块一（/sources/）回答：**结构压力是什么，各方利益逻辑是什么**（YAML 结构化立场）
 - 模块二（/decisionmakers/）回答：**具体的人在具体条件下会做什么决定**（YAML 行为模型）
 - 模块三（/perspectives/）回答：**用某个人的镜片看新问题**（女娲蒸馏出的可调用思维角色，含完整 Agentic Protocol）
 - 模块四（/history/）回答：**为什么他们这样想——2500年帝国经验如何塑造当代决策心理 + 美国战争决策的系统性偏差**（历史领导人YAML + 文化心理学框架 + 美国模式 + 实时简报协议）
 
 调用节奏：
+
 - 需要立场/数据查阅 → 直接读 yaml
 - 需要模拟某人怎么想这道新题 → 激活对应 perspective/PERSPECTIVE.md
 - 需要理解「为什么他们这样想而不是那样想」→ 读 history/leaders/*.yaml 的 contemporary_mapping 字段 + history/frameworks/
@@ -186,6 +191,7 @@ Iran.skill/
 ### Step 0：实时情报搜集（v1.2 新增，每次对话首次触发）
 
 执行 `/history/ops/auto-brief-protocol.md` 的标准搜索序列（5 次搜索）：
+
 1. 停火/谈判状态
 2. 霍尔木兹/封锁状态
 3. 核浓缩/IAEA
@@ -222,6 +228,7 @@ Iran.skill/
 ### Step 2：立场四角验证（v1.2 升级，强制）
 
 重要结论输出前，必须覆盖四个验证维度：
+
 1. **美方叙事**（RAND / CSIS / 华盛顿研究所）
 2. **伊朗/区域叙事**（Iran International波斯语 / Al Jazeera / 伊朗官方）
 3. **第三方叙事**（ICG / Oxford Economics / 华黎明 / Trenin）
@@ -250,6 +257,7 @@ Iran.skill/
 ### Step 3：预测类型判断
 
 在输出预测前，必须先判断类型：
+
 - **结构性预测（擅长）**：地缘压力方向、经济崩溃路径、行为体利益约束、政权长期脆弱性
 - **工程性预测（不擅长）**：谈判条款达成时间、特定领导人某日决定、军事战术细节
 
@@ -287,6 +295,7 @@ Iran.skill/
 ### /sources/ — 模块一（32 个）
 
 **分析师（21 个）**
+
 - [x] `sadjadpour.yaml`（P1 内政/精英）
 - [x] `takeyh.yaml`（P1 内政/精英）
 - [x] `nasr.yaml`（P1 什叶派弧）
@@ -310,6 +319,7 @@ Iran.skill/
 - [x] `kozhanov.yaml`（P7 俄伊关系）
 
 **机构（11 个）**
+
 - [x] `rand.yaml`
 - [x] `csis.yaml`
 - [x] `washingtoninstitute.yaml`
@@ -323,16 +333,19 @@ Iran.skill/
 - [x] `basilinna.yaml`
 
 ### /frameworks/ — 4 个
+
 - [x] `escalation-ladder.md` — 升级梯度模型（含当前位置标注）
 - [x] `nuclear-calculus.md` — 核出口坡道分析
 - [x] `war-termination.md` — 战争终止条件框架
 - [x] `domestic-fragility.md` — 政权崩溃阈值模型
 
 ### /scenarios/ — 2 个
+
 - [x] `scenario-tree.md` — 概率场景树
 - [x] `watchlist.md` — 关键观察指标（每周更新）
 
 ### /bias-check/ — 1 个
+
 - [x] `narrative-matrix.md` — 美/伊/第三方叙事对照表
 
 ### /perspectives/ — 模块三（30 个可调用思维镜片，女娲蒸馏）
@@ -382,6 +395,7 @@ Iran.skill/
 > IRGC 指挥层作为集体决策体，不单独出 perspective，请直接读 `decisionmakers/irgc_command.yaml`。
 
 ### /decisionmakers/ — 模块二（12 个含 README）
+
 - [x] `README.md`
 - [x] `trump.yaml`（P0）
 - [x] `witkoff.yaml`（P1）
@@ -398,6 +412,7 @@ Iran.skill/
 ### /history/ — 模块四（v1.2 新增，27 个文件）
 
 **波斯历史领导人心智模型（7 个）**
+
 - [x] `leaders/cyrus_the_great.yaml` — 「包容性帝国」模型（战略宽容=稳定）
 - [x] `leaders/darius_i.yaml` — 「制度化统治」模型（系统>个人 → Khamenei Sr. 映射）
 - [x] `leaders/shah_abbas_i.yaml` — 「教派国家建构者」模型（宗教=工具 → 伊斯兰共和国=萨法维2.0）
@@ -407,6 +422,7 @@ Iran.skill/
 - [x] `leaders/nader_reza_strongmen.yaml` — 「军事强人」双人模型（IRGC 政治化的历史根基）
 
 **分析框架（8 个）**
+
 - [x] `frameworks/shahnameh-psychology.md` — Shahnameh 文化心理学（5 大叙事原型）
 - [x] `frameworks/historical-pattern-matrix.md` — 历史模式→当代映射矩阵（5 个矩阵）
 - [x] `frameworks/imperial-cycle.md` — 帝国更替周期（6 阶段模型，当前：阶段三·传承危机期）
@@ -417,11 +433,13 @@ Iran.skill/
 - [x] `frameworks/narrative-engine.md` — 叙事引擎（三国/武侠/莎士比亚/希腊悲剧类比框架 + 输出模板）
 
 **美国战争决策模式（3 个）**
+
 - [x] `us-patterns/us-war-patterns.md` — 6 个反复出现的美国对外战争决策模式
 - [x] `us-patterns/us-decision-biases.md` — 8 个系统性偏差 + 扫描清单
 - [x] `us-patterns/us-iran-precedents.yaml` — 7 个美伊关系关键决策节点（1953→2026）
 
 **运维协议（7 个）**
+
 - [x] `ops/auto-brief-protocol.md` — 实时情报简报协议（5 次标准搜索序列）
 - [x] `ops/red-team-protocol.md` — Red Team 魔鬼代言人协议★布鲁金斯建议1
 - [x] `ops/data-sources-uncertainty.md` — 数据源接入+黑天鹅清单(10个)+不确定性框架★布鲁金斯建议4&5
@@ -431,6 +449,7 @@ Iran.skill/
 - [x] `ops/adversarial-debate.md` — 多轮Agent辩论协议（Red Team升级版·5轮结构化对抗·钢人论证·分歧图）
 
 **参考书目（1 个）**
+
 - [x] `READING_LIST.md` — 29 本推荐书目（5 层分级）
 
 ---
@@ -509,18 +528,20 @@ Iran.skill/
 
 1. **立即行动**：使用上文「二、内联精华」中的条款直接回答，不要声明「子文件尚未生成」
 2. **深度分析需求**：引导用户把完整包解压到 skill 目录（覆盖已有 SKILL.md）
-3. 完整部署后应看到约 **110 个文件**：1 SKILL.md + 32 sources/*.yaml + 13 decisionmakers/* + 4 frameworks/*.md + 2 scenarios/*.md + 1 bias-check/*.md + 30 perspectives/*/PERSPECTIVE.md + **27 history/**
-4. 完整部署验证命令：`find iranskill/ -type f | wc -l` 应返回 110 左右
+3. 完整部署后应包含全套模块资源：SKILL.md、sources/ 配置文件、decisionmakers/ 决策者模型、frameworks/ 框架、scenarios/ 场景、bias-check/ 叙事对照、perspectives/ 思维视角与 history/ 历史心智模型
+4. 完整部署验证命令：`find iranskill/ -type f` 应列出包含完整子目录的文件列表
 
 ## 十一、架构升级预留
 
 本 skill 的模块化设计为未来升级预留了接口：
 
 **水平扩展**（新增危机模块）：
+
 - `/ukraine/`、`/taiwan/`、`/korea/` 等模块可复用同一套方法论基础设施（Red Team / 概率审计链 / 辩论协议 / 叙事引擎），只替换领域知识
 - 跨危机模块需新增 `/cross-crisis/` 层，建模危机间联动（伊朗封锁→油价→欧洲通胀→乌克兰军援预算）
 
 **垂直深化**（增强分析能力）：
+
 - 实时数据 API 接入（Kpler / ACLED / IAEA 自动解析）
 - 多语言一手来源（波斯语 Telegram / 希伯来语安全分析 / 阿拉伯语媒体）
 - 回测数据库（累积校准数据）

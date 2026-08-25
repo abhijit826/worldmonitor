@@ -18,12 +18,14 @@
 | **美国军舰巡逻频度** | 待核实 | 实时 | 新增航母编队进入波斯湾 | escalation-ladder (Lv7升级信号) |
 
 **数据来源**：
+
 - Kpler (船队追踪)
 - UKMTO (海事通报)
 - U.S. Navy 5th Fleet 公告
 - Lloyd's List Intelligence
 
 **触发规则**：
+
 - 若连续7天通行船队数=0 → 完全封锁确认 → escalation-ladder 停留第7级
 - 若伊朗IRGC Navy 扣押或攻击船队 → escalation-ladder Lv8 确认
 - 若海运保险费用>10% → 经济实际冲击认可，启动石油收入监测
@@ -41,11 +43,13 @@
 | **与伊朗产能关系** | 待核实 | 每周 | 若油价保持在80$/桶+，伊朗月收入>15亿$ | war-termination (B路径缓解) |
 
 **数据来源**：
+
 - CME Group (期货合约)
 - IEA Oil Market Report (月度)
 - Refinitiv Eikon
 
 **触发规则**：
+
 - 若Brent<50$/桶+伊朗无法出口 → 石油收入<5亿$/月 → domestic-fragility 脆弱性↑ 至6-7/10
 - 若Brent跌幅>20% 单日 → 市场恐慌信号，启动紧急评估
 - 若油价稳定在80-100$/桶 → 伊朗经济可维持，冻结局面（B路径）更可能
@@ -65,12 +69,14 @@
 | **以色列报复空袭（对黎巴嫩/加沙）** | 待确认 | 实时 | 深夜时段大规模轰炸 | escalation-ladder (Lv5→6) |
 
 **数据来源**：
+
 - OSINT (Twitter/Telegram 视频上传)
 - ISW (Institute for the Study of War)
 - US Central Command (CENTCOM) 声明
 - 以色列国防军 (IDF) 声明
 
 **触发规则**：
+
 - 若任何新冲突发生 → 立即更新 scenario-tree（当前分支可能改变）
 - 若连续7天无交火 → war-termination A/B 路径概率↑
 
@@ -88,11 +94,13 @@
 | **IAEA访问权状态** | 待确认 | 实时 | 伊朗限制或驱逐IAEA检查员 | nuclear-calculus (节点B→C) |
 
 **数据来源**：
+
 - IAEA 月度技术报告 (Gov Reports)
 - IAEA Board of Governors 声明
 - 美国国务院 Intelligence report (定期发布)
 
 **触发规则**：
+
 - 若丰度升至70-75% → nuclear-calculus "节点B" 确认 → scenario-tree C1/C2 路径概率↑
 - 若丰度升至80%+ → nuclear-calculus "节点C" 确认 → escalation-ladder Lv8 风险↑ 至40-50%
 - 若IAEA访问权被限制 → nuclear-calculus "秘密突破" 可能 → 情报确定性↓ 10-20%
@@ -113,12 +121,14 @@
 | **表态对象** | 待确认 | 每周 | 从IRGC内部讲话变为国际广播 | domestic-fragility (权力基础) |
 
 **数据来源**：
+
 - IRNA (伊朗国家通讯社)
 - Khamenei.ir 官方网站 (已Mojtaba接管)
 - BBC Persian / RFE/RL (伊朗媒体监测)
 - Twitter/Telegram 伊朗官方频道
 
 **触发规则**：
+
 - 若周度讲话数↓ 至<1/周 → 权力可能面临挑战 OR 权力已稳固需巩固 → domestic-fragility 脆弱性评估
 - 若讲话主题从战争转向和平 → war-termination A路径概率↑
 - 若讲话强硬度↑ 且涉及核武 → nuclear-calculus 快速突破路径可能↑
@@ -137,12 +147,14 @@
 | **离职后下落** | 待确认 | 每周 | 某将领突然失踪 OR 出国就医 | domestic-fragility (清洗信号) |
 
 **数据来源**：
+
 - IRGC 官方声明 (IRGC news website)
 - 伊朗国防部 新闻发布
 - 西方情报摘要 (USG, 欧盟)
 - 伊朗独立媒体 (Paydari, Evin News)
 
 **触发规则**：
+
 - 若月度调任>2人 OR 出现将领失踪 → domestic-fragility 内部分裂评分↑ 至4-5/10
 - 若Quds Force与Revolutionary Guard 互相调任 → 权力分散信号，Mojtaba权力可能受挑战
 - 若Basij将领发表对战争的政治性反对 → Basij 执行意愿↓，domestic-fragility 脆弱性↑
@@ -161,12 +173,14 @@
 | **真主党防御部署** | 待确认 | 每周 | 新部署防空导弹 OR 撤出防御阵地 | escalation-ladder (Lv8→9 准备) |
 
 **数据来源**：
+
 - 以色列国防军 (IDF) 目标库披露
 - BBC/Reuters 黎巴嫩记者报道
 - 真主党官方声明（Al Manar电视）
 - OSINT 视频 (Telegram 黎巴嫩频道)
 
 **触发规则**：
+
 - 若火箭炮密度>100发/天 持续1周 → escalation-ladder Lv5 确认
 - 若真主党领导层讲话从鹰派转鸽派 → war-termination A/B 路径概率↑ 20%+
 - 若真主党撤出防御部署 → 可能为战争即将结束的信号，war-termination A路径概率↑
@@ -184,12 +198,14 @@
 | **以色列议会投票结果** | 待确认 | 每周 | 对伊朗战争政策的议会投票 | war-termination (以色列压力强度) |
 
 **数据来源**：
+
 - 以色列总理办公室声明
 - 以色列国防部声明
 - 以色列议会（Knesset）投票记录
 - 国际媒体 (Times of Israel, Haaretz)
 
 **触发规则**：
+
 - 若Netanyahu与国防部长分歧明显 → 以色列对美国压力↓ → war-termination A路径概率↑ 10%
 - 若议会对伊朗战争支持率<65% → 政府政治成本上升，停火可能↑
 
@@ -208,11 +224,13 @@
 | **通胀率** | 待核实 | 每月 | >3% 月通胀 | domestic-fragility (民众生活困难) |
 
 **数据来源**：
+
 - X.com 伊朗金融账户（实时黑市价格）
 - 伊朗中央银行官方汇率（对比差异）
 - World Bank 伊朗经济指标
 
 **触发规则**：
+
 - 若汇率>150,000 里亚尔/$ → 经济危险，精英外逃可能↑，domestic-fragility 脆弱性↑ 至6/10
 - 若月度贬值>10% → 市场恐慌，Mojtaba权力基础可能动摇
 
@@ -229,11 +247,13 @@
 | **IAEA报告条文** | 待核实 | 每月 | 从"不符合"变为"无法验证" | nuclear-calculus (秘密突破可能) |
 
 **数据来源**：
+
 - IAEA Gov/2026/ 报告
 - 伊朗外交部声明
 - P5+1 官方声明
 
 **触发规则**：
+
 - 若IAEA访问权被限制 → nuclear-calculus 秘密突破可能↑ 至40-50%
 - 若伊朗正式退出NPT → nuclear-calculus 出口2（公开突破）↑ 至60%+
 
@@ -251,12 +271,14 @@
 | **中俄对伊朗核政策的表态** | 待确认 | 每月 | 从"反对突破"变为"同情伊朗地位" | nuclear-calculus (突破环境改善) |
 
 **数据来源**：
+
 - 俄罗斯国防部声明
 - 中国外交部声明
 - 西方情报报告
 - 伊朗官方新闻
 
 **触发规则**：
+
 - 若中俄公开支持伊朗核防御 → nuclear-calculus 突破环境↑，A路径（停火）概率↓
 - 若中俄军援部署↑ → escalation-ladder 美国升级风险↑（若打击会面临报复）
 
@@ -273,11 +295,13 @@
 | **沙特公开立场** | 待确认 | 每月 | 从支持美国打击转为"可接受冻结" | war-termination (A/B路径选择) |
 
 **数据来源**：
+
 - 沙特外交部声明
 - 卡塔尔/阿曼媒体
 - 国际媒体（Reuters, AP）
 
 **触发规则**：
+
 - 若沙特-伊朗对话恢复 → war-termination A/B 路径进度↑ 20-30%
 - 若沙特表态支持冻结 → B路径概率↑ 至50%+
 
@@ -300,6 +324,7 @@
 ---
 
 ## 参考文件
+
 - `frameworks/escalation-ladder.md`
 - `frameworks/nuclear-calculus.md`
 - `frameworks/war-termination.md`
