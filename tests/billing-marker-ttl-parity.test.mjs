@@ -128,13 +128,14 @@ test('exactly three files derive the entitlements cache key', async () => {
   // in the repo would be invisible to it — the drift would be silent in exactly
   // the way #5600 was. Pin the count repo-wide.
   const { execFileSync } = await import('node:child_process');
-  const root = new URL('../', import.meta.url).pathname;
+  const { fileURLToPath } = await import('node:url');
+  const root = fileURLToPath(new URL('../', import.meta.url));
   const out = execFileSync(
     'git',
     ['grep', '-l', '-F', 'entitlements:${', '--', 'api', 'server', 'convex', 'src', 'scripts'],
     { cwd: root, encoding: 'utf8' },
   );
-  const files = out.split('\n').filter(Boolean).sort();
+  const files = out.replace(/\r\n/g, '\n').split('\n').map((f) => f.trim()).filter(Boolean).sort();
   assert.deepEqual(files, [
     'api/_user-api-key.js',
     'convex/payments/cacheActions.ts',

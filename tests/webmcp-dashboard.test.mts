@@ -330,7 +330,9 @@ describe('WebMCP live dashboard bindings', () => {
       },
     );
 
-    await new Promise<void>((resolve) => setImmediate(resolve));
+    for (let i = 0; i < 50 && rendererReadyCalls === 0; i++) {
+      await new Promise<void>((resolve) => setTimeout(resolve, 5));
+    }
     assert.equal(rendererReadyCalls, 1);
     assert.equal(ctx.mapLayers.weather, false, 'layers must not mutate before renderer readiness');
 
@@ -413,10 +415,14 @@ describe('WebMCP live dashboard bindings', () => {
 
     await Promise.resolve();
     assert.deepEqual(events, ['wait_ui']);
-    await new Promise<void>((resolve) => setImmediate(resolve));
+    for (let i = 0; i < 50 && events.length < 2; i++) {
+      await new Promise<void>((resolve) => setTimeout(resolve, 5));
+    }
     assert.deepEqual(events, ['wait_ui', 'wait_map']);
     resolveReady();
-    await new Promise<void>((resolve) => setImmediate(resolve));
+    for (let i = 0; i < 50 && !events.includes('wait_settlement'); i++) {
+      await new Promise<void>((resolve) => setTimeout(resolve, 5));
+    }
     assert.deepEqual(events, ['wait_ui', 'wait_map', 'map_ready', 'set_view', 'wait_settlement']);
     resolveSettled();
     const result = await pending;

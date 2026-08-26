@@ -30,7 +30,7 @@ function assertTokensInOrder(text, tokens) {
 }
 
 describe('cursor skill: sentry-triage', () => {
-  const markdown = readFileSync(SKILL_PATH, 'utf8');
+  const markdown = readFileSync(SKILL_PATH, 'utf8').replace(/\r\n/g, '\n');
   const frontmatter = parseFrontmatter(markdown);
 
   it('uses Cursor Agent Skills frontmatter that matches the folder name', () => {

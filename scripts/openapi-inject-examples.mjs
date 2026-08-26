@@ -1184,7 +1184,8 @@ function replaceResponseExample(lines, opStart, opEnd, code, example) {
 }
 
 function patchYamlExamples(raw, spec, label) {
-  const lines = raw.split('\n');
+  const isCrlf = raw.includes('\r\n');
+  const lines = raw.replace(/\r\n/g, '\n').split('\n');
   for (const [path, ops] of Object.entries(spec.paths ?? {})) {
     for (const [method, op] of Object.entries(ops ?? {})) {
       if (!HTTP_METHODS.has(method) || !op || typeof op !== 'object') continue;
@@ -1212,7 +1213,7 @@ function patchYamlExamples(raw, spec, label) {
       }
     }
   }
-  return lines.join('\n');
+  return isCrlf ? lines.join('\r\n') : lines.join('\n');
 }
 
 function processServiceSpec(file) {

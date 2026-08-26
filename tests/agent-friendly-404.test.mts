@@ -179,7 +179,7 @@ describe('agent-friendly 404s (orank agent-friendly-404)', () => {
 
   it('keeps public/404.html as the human HTML filesystem 404', () => {
     const html = readFileSync(resolve(import.meta.dirname, '../public/404.html'), 'utf8');
-    assert.equal(html, buildHumanNotFoundHtml());
+    assert.equal(html.replace(/\r\n/g, '\n'), buildHumanNotFoundHtml().replace(/\r\n/g, '\n'));
     assert.match(html, /<!DOCTYPE html>/i, 'Vercel filesystem 404s must be a human HTML page');
     assert.match(html, /Page not found/i);
     assert.ok(html.includes('/dashboard'));

@@ -366,7 +366,7 @@ globalThis.fetch = async (url, init = {}) => {
     try {
       const scriptPath = fileURLToPath(new URL('../scripts/seed-health-air-quality.mjs', import.meta.url));
       const result = await new Promise((resolve) => {
-        const child = spawn(process.execPath, ['--import', preloadPath, scriptPath], {
+        const child = spawn(process.execPath, ['--import', pathToFileURL(preloadPath).href, scriptPath], {
           env: {
             ...process.env,
             UPSTASH_REDIS_REST_URL: redisUrl,

@@ -140,6 +140,7 @@ function runGit(args) {
     encoding: 'utf8',
     maxBuffer: 4 * 1024 * 1024,
     timeout: 30_000,
+    shell: process.platform === 'win32',
   });
   if (result.signal) throw new Error(`git ${args.join(' ')} timed out`);
   if (result.error) throw result.error;
@@ -155,6 +156,7 @@ function isAncestor(ancestor, descendant) {
     encoding: 'utf8',
     maxBuffer: 4 * 1024 * 1024,
     timeout: 30_000,
+    shell: process.platform === 'win32',
   });
   if (result.signal) throw new Error(`git ${args.join(' ')} timed out`);
   if (result.error) throw result.error;

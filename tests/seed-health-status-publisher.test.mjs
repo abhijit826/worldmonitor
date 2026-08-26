@@ -8,7 +8,7 @@ import {
   rmSync,
   writeFileSync,
 } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
+import { delimiter, dirname, join, resolve } from 'node:path';
 import { describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
@@ -83,48 +83,57 @@ function runPublisher({
     writeFileSync(join(statusesDir, `${ANCESTOR}.json`), JSON.stringify(ancestorStatuses));
     writeFileSync(join(statusesDir, `${STATUS_ANCHOR}.json`), JSON.stringify(statusStatuses));
     writeFileSync(postLog, '');
-    writeFileSync(join(fakeBin, 'git'), [
-      '#!/bin/sh',
-      'case "$1" in',
-      '  log)',
-      `    printf '%s\\n%s\\n' '${HEAD}' '${ANCESTOR}'`,
-      '    ;;',
-      '  merge-base)',
-      '    [ "$2" = "--is-ancestor" ] || exit 91',
-      '    [ "$FAKE_ANCESTRY_VALID" = "true" ]',
-      '    ;;',
-      '  *) exit 90 ;;',
-      'esac',
-      '',
-    ].join('\n'));
-    writeFileSync(join(fakeBin, 'gh'), [
-      '#!/bin/sh',
-      'case "$1:$2" in',
-      '  api:--paginate)',
-      '    sha=""',
-      '    for arg in "$@"; do',
-      '      case "$arg" in',
-      '        */commits/*/statuses*)',
-      '          rest=${arg#*/commits/}',
-      '          sha=${rest%%/statuses*}',
-      '          ;;',
-      '      esac',
-      '    done',
-      '    [ -f "$FAKE_STATUS_DIR/$sha.json" ] || exit 91',
-      '    printf "["',
-      '    cat "$FAKE_STATUS_DIR/$sha.json"',
-      '    printf "]\\n"',
-      '    ;;',
-      '  api:--method)',
-      '    printf "%s\\n" "$*" >> "$FAKE_POST_LOG"',
-      '    printf "{}\\n"',
-      '    ;;',
-      '  *) exit 92 ;;',
-      'esac',
-      '',
-    ].join('\n'));
+    const gitScript = [
+      'const args = process.argv.slice(2);',
+      'if (args[0] === "log") {',
+      '  console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\nbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");',
+      '  process.exit(0);',
+      '}',
+      'if (args[0] === "merge-base") {',
+      '  if (args[1] !== "--is-ancestor") process.exit(91);',
+      '  process.exit(process.env.FAKE_ANCESTRY_VALID === "true" ? 0 : 1);',
+      '}',
+      'process.exit(90);',
+    ].join('\n');
+
+    const ghScript = [
+      'import { existsSync, readFileSync, appendFileSync } from "node:fs";',
+      'import { join } from "node:path";',
+      'const args = process.argv.slice(2);',
+      'if (args[0] === "api") {',
+      '  const postLog = process.env.FAKE_POST_LOG;',
+      '  if (postLog && args.includes("POST")) {',
+      '    appendFileSync(postLog, args.join(" ") + "\\n");',
+      '    process.exit(0);',
+      '  }',
+      '  const statusDir = process.env.FAKE_STATUS_DIR;',
+      '  const shaMatch = args.find((a) => a.includes("/commits/"))?.match(/\\/commits\\/([^\\/]+)\\/statuses/);',
+      '  const sha = shaMatch ? shaMatch[1] : null;',
+      '  const file = join(statusDir, `${sha}.json`);',
+      '  if (existsSync(file)) {',
+      '    console.log(`[${readFileSync(file, "utf8").trim()}]`);',
+      '    process.exit(0);',
+      '  }',
+      '  console.log("[]");',
+      '  process.exit(0);',
+      '}',
+      'process.exit(92);',
+    ].join('\n');
+
+    writeFileSync(join(fakeBin, 'git.mjs'), gitScript);
+    writeFileSync(join(fakeBin, 'gh.mjs'), ghScript);
+
+    const shGit = `#!/bin/sh\nexec "${process.execPath}" "${join(fakeBin, 'git.mjs')}" "$@"`;
+    const shGh = `#!/bin/sh\nexec "${process.execPath}" "${join(fakeBin, 'gh.mjs')}" "$@"`;
+    writeFileSync(join(fakeBin, 'git'), shGit);
+    writeFileSync(join(fakeBin, 'gh'), shGh);
     chmodSync(join(fakeBin, 'git'), 0o755);
     chmodSync(join(fakeBin, 'gh'), 0o755);
+
+    if (process.platform === 'win32') {
+      writeFileSync(join(fakeBin, 'git.cmd'), `@"${process.execPath}" "${join(fakeBin, 'git.mjs')}" %*`);
+      writeFileSync(join(fakeBin, 'gh.cmd'), `@"${process.execPath}" "${join(fakeBin, 'gh.mjs')}" %*`);
+    }
 
     const args = [
       publisher,
@@ -132,19 +141,23 @@ function runPublisher({
       '--status-sha', statusSha,
       '--report', reportPath,
     ];
+    const pathKey = Object.keys(process.env).find((k) => k.toUpperCase() === 'PATH') || 'PATH';
+    const env = {
+      ...process.env,
+      FAKE_POST_LOG: postLog,
+      FAKE_STATUS_DIR: statusesDir,
+      FAKE_ANCESTRY_VALID: String(ancestryValid),
+      GH_TOKEN: 'test-token',
+      GITHUB_REPOSITORY: 'koala73/worldmonitor',
+      SEED_STATUS_WRITER_LOGIN: WRITER,
+      NODE_NO_WARNINGS: '1',
+    };
+    env[pathKey] = `${fakeBin}${delimiter}${process.env[pathKey] || ''}`;
+
     const result = spawnSync(process.execPath, args, {
       cwd: repoRoot,
       encoding: 'utf8',
-      env: {
-        ...process.env,
-        FAKE_POST_LOG: postLog,
-        FAKE_STATUS_DIR: statusesDir,
-        FAKE_ANCESTRY_VALID: String(ancestryValid),
-        GH_TOKEN: 'test-token',
-        GITHUB_REPOSITORY: 'koala73/worldmonitor',
-        SEED_STATUS_WRITER_LOGIN: WRITER,
-        PATH: `${fakeBin}:${process.env.PATH}`,
-      },
+      env,
     });
     return { ...result, posts: readFileSync(postLog, 'utf8') };
   } finally {

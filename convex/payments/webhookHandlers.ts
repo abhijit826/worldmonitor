@@ -266,7 +266,12 @@ export const webhookHandler = httpAction(async (ctx, request) => {
     const errorKind = error instanceof Error && error.name
       ? error.name
       : "WebhookPayloadValidationError";
-    const errorMessage = error instanceof Error ? error.message : String(error);
+    let errorMessage = "Webhook payload validation failed";
+    try {
+      errorMessage = error instanceof Error ? error.message : String(error);
+    } catch {
+      errorMessage = String(error);
+    }
     const parsedRecord =
       parsedBody !== null && typeof parsedBody === "object" && !Array.isArray(parsedBody)
         ? (parsedBody as Record<string, unknown>)
@@ -282,7 +287,7 @@ export const webhookHandler = httpAction(async (ctx, request) => {
     });
     // sentry-coverage-ok: failure details are persisted above and the
     // scheduled report mutation provides the structured Sentry signal.
-    console.error("Webhook payload validation failed:", error);
+    console.error("Webhook payload validation failed:", errorMessage);
     return new Response("Invalid webhook payload", { status: 500 });
   }
 

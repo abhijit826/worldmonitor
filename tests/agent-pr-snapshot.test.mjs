@@ -413,7 +413,7 @@ describe('agent PR snapshot', () => {
     assert.equal(live.checks.checkRuns.length, 1);
     assert.equal(networkTimeouts.get('fetch'), 180_000);
     assert.equal(networkTimeouts.get('ls-remote'), 180_000);
-    assert.match(live.cache.path, new RegExp(`${headOid}\\.json$`));
+    assert.match(live.cache.path.replace(/\\/g, '/'), new RegExp(`${headOid}\\.json$`));
     assert.equal(existsSync(live.cache.path), true);
     assert.equal(graphQlCalls, 1);
 
@@ -453,7 +453,7 @@ describe('agent PR snapshot', () => {
     const target = join(parent, 'target');
     const cacheDir = join(parent, 'cache');
     mkdirSync(target, { mode: 0o700 });
-    symlinkSync(target, cacheDir, 'dir');
+    symlinkSync(target, cacheDir, process.platform === 'win32' ? 'junction' : 'dir');
     assert.throws(
       () => readCachedSnapshot({ cacheDir, prNumber: 123, repoName: 'koala73/worldmonitor' }),
       /Unsafe PR snapshot cache directory/,

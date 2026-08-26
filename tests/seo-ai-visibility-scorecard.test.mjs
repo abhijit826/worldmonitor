@@ -1227,7 +1227,7 @@ describe('scorecard computation', () => {
         ),
         'utf8',
       );
-      assert.equal(generated, committed);
+      assert.equal(generated.replace(/\r\n/g, '\n'), committed.replace(/\r\n/g, '\n'));
       await runCli([
         '--queries',
         'docs/research/seo-ai-visibility/query-set.json',

@@ -1749,7 +1749,7 @@ describe('beforeSend — Firefox bare-primitive throw (WORLDMONITOR-106)', () =>
     // returns nothing, and a scan that would fail if it did NOT strip comments.
     const files = ['../src', '../shared', '../api'].flatMap(rel => walk(resolve(__dirname, rel)));
     assert.ok(files.length > 100, `walk must reach the real tree, got ${files.length} files`);
-    assert.ok(files.some(f => f.endsWith('bootstrap/sentry-init.ts')), 'walk must include sentry-init.ts');
+    assert.ok(files.some(f => f.replace(/\\/g, '/').endsWith('bootstrap/sentry-init.ts')), 'walk must include sentry-init.ts');
 
     const raw = readFileSync(resolve(__dirname, '../src/bootstrap/sentry-init.ts'), 'utf-8');
     assert.ok(BARE_PRIMITIVE_THROW.test(raw),

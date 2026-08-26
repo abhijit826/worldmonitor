@@ -114,6 +114,7 @@ function runGh(args, { env = process.env } = {}) {
     maxBuffer: 16 * 1024 * 1024,
     timeout: 60_000,
     env,
+    shell: process.platform === 'win32',
   });
   if (result.signal) throw new Error(`gh ${args.join(' ')} timed out`);
   if (result.error) throw result.error;

@@ -325,9 +325,9 @@ describe('Umami runtime remediation (#6024)', () => {
     const workflow = read('.github/workflows/test.yml');
     const deployGate = read('.github/workflows/deploy-gate.yml');
     const integration = read('tests/umami-postgres-integration.mjs');
-    const umamiJob = workflow.match(/^ {2}umami-postgres:\n[\s\S]*?(?=^ {2}[a-z][a-z0-9-]+:\n)/m)?.[0];
+    const umamiJob = workflow.match(/^ {2}umami-postgres:\r?\n[\s\S]*?(?=^ {2}[a-z][a-z0-9-]+:\r?\n)/m)?.[0];
 
-    assert.match(workflow, /^\s{6}umami: \$\{\{ steps\.diff\.outputs\.umami \}\}$/m);
+    assert.match(workflow, /^\s{6}umami: \$\{\{ steps\.diff\.outputs\.umami \}\}\r?$/m);
     assert.ok(umamiJob, 'expected a dedicated umami-postgres CI job');
     assert.match(workflow, /\^Dockerfile\\\.umami-retention\$\//);
     assert.match(workflow, /\^scripts\\\/umami-retention\\\.sql\$\//);
@@ -335,7 +335,7 @@ describe('Umami runtime remediation (#6024)', () => {
       umamiJob,
       /image: postgres:17-alpine@sha256:[a-f0-9]{64}/,
     );
-    assert.match(umamiJob, /^\s{4}timeout-minutes: 20$/m);
+    assert.match(umamiJob, /^\s{4}timeout-minutes: 20\r?$/m);
     assert.match(umamiJob, /docker build --file Dockerfile\.umami --tag worldmonitor\/umami:ci \./);
     assert.match(
       umamiJob,

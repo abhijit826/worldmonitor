@@ -8,18 +8,13 @@ export interface DemographicsObservationLike {
 
 function formatValue(value: number, unit: string): string {
   if (unit === 'people') {
-    return Math.round(value).toLocaleString();
+    return Math.round(value).toLocaleString('en-US');
   }
 
-  const formatted = value.toLocaleString(undefined, { maximumFractionDigits: 1 });
+  const formatted = value.toLocaleString('en-US', { maximumFractionDigits: 1 });
   if (unit === 'percent') return `${formatted}%`;
   if (unit === 'years') {
-    return new Intl.NumberFormat(undefined, {
-      maximumFractionDigits: 1,
-      style: 'unit',
-      unit: 'year',
-      unitDisplay: 'long',
-    }).format(value);
+    return `${formatted} years`;
   }
   // A language-neutral ratio avoids leaking an English unit into localized panels.
   if (unit === 'people per million') return `${formatted} / 10⁶`;

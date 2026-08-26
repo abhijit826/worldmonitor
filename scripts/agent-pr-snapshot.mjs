@@ -502,7 +502,7 @@ function assertPrivateDirectory(path) {
   if (process.getuid && stat.uid !== process.getuid()) {
     throw new Error(`PR snapshot cache directory is not owned by the current user: ${path}`);
   }
-  if ((stat.mode & 0o077) !== 0) {
+  if (process.platform !== 'win32' && (stat.mode & 0o077) !== 0) {
     throw new Error(`PR snapshot cache directory permissions are too broad: ${path}`);
   }
 }
@@ -516,7 +516,7 @@ function ensurePrivateDirectory(path, cacheDir) {
     throw new Error('PR snapshot cache path escapes its root');
   }
   let current = root;
-  for (const segment of suffix.split('/').filter(Boolean)) {
+  for (const segment of suffix.split(/[/\\]/).filter(Boolean)) {
     current = join(current, segment);
     try {
       mkdirSync(current, { mode: 0o700 });
@@ -535,7 +535,7 @@ function assertPrivateFile(path) {
   if (process.getuid && stat.uid !== process.getuid()) {
     throw new Error(`PR snapshot cache file is not owned by the current user: ${path}`);
   }
-  if ((stat.mode & 0o077) !== 0) {
+  if (process.platform !== 'win32' && (stat.mode & 0o077) !== 0) {
     throw new Error(`PR snapshot cache file permissions are too broad: ${path}`);
   }
 }

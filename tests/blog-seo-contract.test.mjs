@@ -13,10 +13,10 @@ const postFiles = readdirSync(blogDir).filter((name) => name.endsWith('.md')).so
 
 function parsePost(file) {
   const source = readFileSync(join(blogDir, file), 'utf8');
-  const frontmatter = source.match(/^---\n([\s\S]*?)\n---\n/);
+  const frontmatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
   assert.ok(frontmatter, `${file}: missing frontmatter`);
   const field = (name) => {
-    const match = frontmatter[1].match(new RegExp(`^${name}:\\s*(?:"([^"]*)"|'([^']*)')$`, 'm'));
+    const match = frontmatter[1].match(new RegExp(`^${name}:\\s*(?:"([^"]*)"|'([^']*)')\\r?$`, 'm'));
     return match?.[1] ?? match?.[2];
   };
   return { file, source, body: source.slice(frontmatter[0].length), field };
