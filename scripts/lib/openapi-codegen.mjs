@@ -800,7 +800,7 @@ export function readDecisionSignalProvenanceContract() {
   const familySrc = readFileSync(
     resolve(root, 'shared/decision-signal-provenance-families.ts'),
     'utf8',
-  );
+  ).replaceAll('\r', '');
   const version = src.match(
     /DECISION_SIGNAL_PROVENANCE_CONTRACT_VERSION\s*=\s*'([^']+)'\s+as const/,
   )?.[1];

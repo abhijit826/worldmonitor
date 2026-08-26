@@ -10,15 +10,16 @@
  */
 import { readFileSync, existsSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
-const ROOT = new URL('../', import.meta.url).pathname;
+const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const DOCS_JSON = join(ROOT, 'docs', 'docs.json');
 const DOCS_DIR = join(ROOT, 'docs');
 
 function readZhDoc(page) {
-  return readFileSync(join(DOCS_DIR, 'zh', `${page}.mdx`), 'utf8');
+  return readFileSync(join(DOCS_DIR, 'zh', `${page}.mdx`), 'utf8').replaceAll('\r', '');
 }
 
 function sectionBetween(content, startHeading, endHeading) {

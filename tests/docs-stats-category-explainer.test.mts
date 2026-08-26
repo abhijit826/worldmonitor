@@ -16,6 +16,7 @@
 import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
@@ -26,8 +27,8 @@ import {
   DOC_VALIDATORS,
 } from '../scripts/docs-stats.mjs';
 
-const ROOT = new URL('../', import.meta.url).pathname;
-const read = (p: string) => readFileSync(join(ROOT, p), 'utf8');
+const ROOT = fileURLToPath(new URL('../', import.meta.url));
+const read = (p: string) => readFileSync(join(ROOT, p), 'utf8').replaceAll('\r', '');
 const REAL_STATS = computeStats();
 
 /** Reader that applies one edit to the explainer and passes everything else through. */

@@ -186,7 +186,7 @@ function buildInputsFor(entry, repoRootDir) {
       for (const file of RELAY_INVENTORY_BUILD_INPUTS) inputs.add(file);
     }
   }
-  return inputs;
+  return new Set([...inputs].map((file) => file.replace(/\\/g, '/')));
 }
 
 // walkContainerGraph only follows import/require/dynamic-import edges, so a data
@@ -371,10 +371,10 @@ function resolveRuntimeSurface(entry, repoRootDir) {
   }
 
   const runtimeFiles = new Set([
-    ...[...visited].map((file) => relative(repoRootDir, file)),
-    ...extractSharedConfigDependencies(visited, entry.deployMode),
-    ...extractFileReadDependencies(visited, repoRootDir),
-    ...[...literals].map((file) => relative(repoRootDir, file)),
+    ...[...visited].map((file) => relative(repoRootDir, file).replace(/\\/g, '/')),
+    ...[...extractSharedConfigDependencies(visited, entry.deployMode)].map((file) => file.replace(/\\/g, '/')),
+    ...[...extractFileReadDependencies(visited, repoRootDir)].map((file) => file.replace(/\\/g, '/')),
+    ...[...literals].map((file) => relative(repoRootDir, file).replace(/\\/g, '/')),
   ]);
   return { visited, unresolved, runtimeFiles, converged };
 }
@@ -1166,7 +1166,7 @@ describe('closure detection layers', () => {
       );
       assert.equal(contract.hasTsx, true, 'this image installs tsx and sets NODE_OPTIONS');
       assert.ok(
-        contract.dynamicRoots.some((dir) => dir.endsWith('/server')),
+        contract.dynamicRoots.some((dir) => dir.replace(/\\/g, '/').endsWith('/server')),
         'server/ is COPYd into this image, so dynamic imports can land there',
       );
     });
