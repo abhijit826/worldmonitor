@@ -655,6 +655,18 @@ const PROVIDER_OVERRIDES = {
     attribution: 'Excluded from the provider count: transactional email delivery.',
     status: 'excluded',
   },
+  'api.groq.com': {
+    provider: 'api.groq.com',
+    license: 'Excluded: first-party, control-plane, UI, or rendering transport',
+    attribution: 'Excluded from the external-provider count: not an ingested upstream dataset.',
+    status: 'excluded',
+  },
+  'workos.com': {
+    provider: 'workos.com',
+    license: 'Excluded: first-party, control-plane, UI, or rendering transport',
+    attribution: 'Excluded from the external-provider count: not an ingested upstream dataset.',
+    status: 'excluded',
+  },
   'browser.mcp.cloudflare.com': {
     provider: 'Cloudflare Browser MCP',
     license: 'Excluded: optional rendering/automation connector',
@@ -820,13 +832,13 @@ const PROVIDER_OVERRIDES = {
 // a provider-bearing override a separate, explicit lifecycle event instead of
 // something `--write` can silently normalize into the manifest.
 export const PROVIDER_IDENTITY_REVIEW = Object.freeze({
-  sha256: 'a7ab631b0e17d681791f6978832fb0a8c4f8567bfa1c90d9e79a747b5a7dfbfe',
-  reason: 'Keep Toronto Police Service C4S live-dispatch on services.arcgis.com distinct from Toronto Police Service Open Data on data.tps.ca and www.tps.ca, so live CAD is not catalogued as Open Data / geopolitics.',
+  sha256: '976d2e61b31787a917c8ac2be6973c92597d8f472a6425f44da12ff9cb3f46c1',
+  reason: 'Keep Toronto Police Service C4S live-dispatch on services.arcgis.com distinct from Toronto Police Service Open Data on data.tps.ca and www.tps.ca; plus add api.groq.com and workos.com as excluded control-plane/rendering hosts.',
   // A URL cited here is scanned like any other: this file sits inside
   // SOURCE_ROOTS, so citing a host that is not already a registered source
   // invents a provider row for it. The B.C. catalogue URLs above are safe
   // because that host is itself an observed source; parallel.ai is not.
-  reviewReference: 'Issues #7012 and #6682 Toronto safety sources; plus Issue #7000 publisher-centric source catalog; plus Issue #7001, Issue #6437, Issue #6622, Issue #6659, and PR #6447 identity reviews.',
+  reviewReference: 'Issues #7012 and #6682 Toronto safety sources; plus Issue #7000 publisher-centric source catalog; plus Issue #7001, Issue #6437, Issue #6622, Issue #6659, and PR #6447 identity reviews; plus PR #4699 stabilization.',
 });
 
 export function providerIdentityDigest(providerOverrides = PROVIDER_OVERRIDES) {
@@ -916,7 +928,7 @@ const EXCLUDED_HOSTS = new Set([
 ]);
 
 function read(rootDir, path) {
-  return readFileSync(join(rootDir, path), 'utf8');
+  return readFileSync(join(rootDir, path), 'utf8').replaceAll('\r', '');
 }
 
 function readdirPresentSync(absoluteDir) {
@@ -1633,7 +1645,7 @@ export function matchGeneratedAttributionSection(docs) {
 
 function updateDocs(rootDir, section) {
   const path = join(rootDir, DOCS_PATH);
-  const current = readFileSync(path, 'utf8');
+  const current = readFileSync(path, 'utf8').replaceAll('\r', '');
   const markerPattern = inventoryMarkerPattern(true);
   const updated = markerPattern.test(current)
     // Function replacement: `section` is generated from manifest text that can
@@ -1685,10 +1697,10 @@ export function checkSourceAttribution(rootDir = ROOT) {
     declarations,
     geography: loadSourceGeography(rootDir),
   }));
-  if (readFileSync(manifestPath, 'utf8') !== rebuilt) {
+  if (readFileSync(manifestPath, 'utf8').replaceAll('\r', '') !== rebuilt) {
     return { errors: [`${MANIFEST_PATH} is out of date; ${REGENERATE_HINT}`] };
   }
-  const actual = matchGeneratedAttributionSection(readFileSync(docsPath, 'utf8'));
+  const actual = matchGeneratedAttributionSection(readFileSync(docsPath, 'utf8').replaceAll('\r', ''));
   if (actual !== renderAttributionSection(inventory, previous)) {
     return { errors: [`${DOCS_PATH} is out of date; ${REGENERATE_HINT}`] };
   }

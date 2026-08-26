@@ -821,10 +821,15 @@
       "host": "api.groq.com",
       "provider": "api.groq.com",
       "kind": "structured",
-      "observed": false,
+      "observed": true,
       "license": "Excluded: first-party, control-plane, UI, or rendering transport",
       "attribution": "Excluded from the external-provider count: not an ingested upstream dataset.",
-      "status": "excluded"
+      "status": "excluded",
+      "references": [
+        {
+          "path": "server/_shared/llm-health.ts"
+        }
+      ]
     },
     {
       "host": "api.hyperliquid.xyz",
@@ -9883,10 +9888,15 @@
       "host": "workos.com",
       "provider": "workos.com",
       "kind": "structured",
-      "observed": false,
+      "observed": true,
       "license": "Excluded: first-party, control-plane, UI, or rendering transport",
       "attribution": "Excluded from the external-provider count: not an ingested upstream dataset.",
-      "status": "excluded"
+      "status": "excluded",
+      "references": [
+        {
+          "path": "api/oauth-authorization-server.ts"
+        }
+      ]
     },
     {
       "host": "worldmonitor.app",
